@@ -266,15 +266,16 @@
     }
 
     .familia-tab {
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      cursor: pointer;
-      border-right: 1px solid var(--gris-brd);
-      transition: background .2s;
-      background: var(--gris-osc);
-    }
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  /* ← agregar esto */
+  gap: 1rem;
+  cursor: pointer;
+  border-right: 1px solid var(--gris-brd);
+  transition: background .2s;
+  background: var(--gris-osc);
+}
 
     .familia-tab:last-child { border-right: none; }
     .familia-tab:hover { background: var(--gris-med); }
@@ -292,13 +293,13 @@
     .fam-dot.fiam  { background: var(--c-fiam); }
     .fam-dot.queso { background: var(--c-queso); }
 
-    .fam-info { 
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 120px;
-   }
+   .fam-info { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+    }
 
     .fam-name {
       font-family: 'Barlow Condensed', sans-serif;
