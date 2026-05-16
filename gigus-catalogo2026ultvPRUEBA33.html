@@ -1,0 +1,3543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gigus Distribuciones – Catálogo de Productos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --naranja:   #D94A1E;
+      --naranja2:  #FF6A3D;
+      --negro:     #0B0B0C;
+      --gris-osc:  #121214;
+      --gris-med:  #1A1A1D;
+      --gris-brd:  #26262A;
+      --gris-txt:  #A1A1AA;
+      --blanco:    #FAFAFA;
+      --radius:    14px;
+
+      /* colores por familia */
+      --c-pan:     #D94A1E;
+      --c-fiam:    #C0392B;
+      --c-queso:   #D4860A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--negro);
+      color: var(--blanco);
+      min-height: 100vh;
+    }
+    .img-modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.img-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  animation: zoomIn .25s ease;
+}
+
+#img-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+    /* ── FONDO TEXTURA ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 10% 20%, rgba(232,66,24,.07) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--negro);
+      border-bottom: 1px solid var(--gris-brd);
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-svg {
+  width: 85px;
+  height: auto;
+}
+
+.logo-text h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.logo-text span {
+  font-size: 12px;
+  color: #666;
+}
+
+    nav {
+      display: flex;
+      gap: .3rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    nav button {
+      background: transparent;
+      border: 1px solid var(--gris-brd);
+      color: var(--gris-txt);
+      padding: .4rem 1rem;
+      border-radius: 4px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .18s;
+    }
+
+    nav button:hover { border-color: var(--naranja); color: var(--naranja); }
+
+    nav button.active {
+      background: var(--naranja);
+      border-color: var(--naranja);
+      color: #fff;
+    }
+
+    nav button[data-cat="panificados"].active { background: var(--c-pan); border-color: var(--c-pan); }
+    nav button[data-cat="fiambres"].active    { background: var(--c-fiam); border-color: var(--c-fiam); }
+    nav button[data-cat="quesos"].active      { background: var(--c-queso); border-color: var(--c-queso); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: var(--gris-osc);
+      border-bottom: 3px solid var(--naranja);
+      padding: 4.5rem 2rem 3.5rem;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(6rem, 20vw, 14rem);
+      font-weight: 800;
+      color: rgba(255,255,255,.025);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -.02em;
+      user-select: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--naranja);
+      margin-bottom: 1rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--naranja);
+    }
+
+    .hero h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+      margin-bottom: .75rem;
+      color: var(--blanco);
+    }
+
+    .hero h2 span { color: var(--naranja); }
+
+    .hero p {
+      font-size: .95rem;
+      color: var(--gris-txt);
+      font-weight: 300;
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* ── BUSCADOR ── */
+    .search-bar {
+      max-width: 420px;
+      position: relative;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: .75rem 1.2rem .75rem 2.8rem;
+      border-radius: 5px;
+      border: 1px solid var(--gris-brd);
+      background: var(--negro);
+      color: var(--blanco);
+      font-family: 'Barlow', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .search-bar input:focus { border-color: var(--naranja); }
+    .search-bar input::placeholder { color: var(--gris-txt); }
+
+    .search-bar .icon {
+      position: absolute;
+      left: .9rem; top: 50%;
+      transform: translateY(-50%);
+      color: var(--gris-txt);
+      font-size: .95rem;
+      pointer-events: none;
+    }
+
+    /* ── FAMILIAS BANNER ── */
+    .familias {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--gris-brd);
+      position: relative;
+      z-index: 1;
+    }
+
+    .familia-tab {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      cursor: pointer;
+      border-right: 1px solid var(--gris-brd);
+      transition: background .2s;
+      background: var(--gris-osc);
+    }
+
+    .familia-tab:last-child { border-right: none; }
+    .familia-tab:hover { background: var(--gris-med); }
+
+    .familia-tab.active-fam { background: var(--gris-med); }
+    .familia-tab.active-fam .fam-name { color: var(--blanco); }
+
+    .fam-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .fam-dot.pan   { background: var(--c-pan); }
+    .fam-dot.fiam  { background: var(--c-fiam); }
+    .fam-dot.queso { background: var(--c-queso); }
+
+    .fam-info { 
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .fam-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--gris-txt);
+      line-height: 1;
+    }
+
+    .fam-brand {
+      font-size: .68rem;
+      color: var(--gris-txt);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: .2rem;
+      opacity: .6;
+    }
+    .fam-logo {
+  width: 50%;
+  max-width: 70px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 12px;
+  }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--blanco);
+    }
+
+    .section-count {
+      font-size: .78rem;
+      color: var(--gris-txt);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    /* separador de familia en el grid */
+    .family-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0 .75rem;
+    }
+
+    .family-divider:first-child { margin-top: 0; }
+
+    .fam-divider-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      white-space: nowrap;
+    }
+
+    .fam-divider-label.pan   { color: var(--c-pan); }
+    .fam-divider-label.fiam  { color: var(--c-fiam); }
+    .fam-divider-label.queso { color: var(--c-queso); }
+
+    .fam-divider-brand {
+      font-size: .7rem;
+      color: var(--gris-txt);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-left: .25rem;
+    }
+
+    .fam-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--gris-brd);
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: linear-gradient(145deg, #141416, #0F0F11);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all .25s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      animation: fadeUp .45s ease both;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.04), transparent);
+      opacity: 0;
+      transition: opacity .25s;
+      pointer-events: none;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 25px 60px rgba(0,0,0,.6);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .card.pan:hover   { border-color: var(--c-pan); }
+    .card.fiam:hover  { border-color: var(--c-fiam); }
+    .card.queso:hover { border-color: var(--c-queso); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--gris-med);
+      position: relative;
+    }
+
+    .card-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s;
+    }
+
+    .card:hover .card-img { transform: scale(1.15); }
+
+    .card-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+      color: var(--gris-txt);
+    }
+
+    .card-img-placeholder .emoji { font-size: 2.2rem; }
+    .card-img-placeholder span {
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .6;
+    }
+
+    /* franja de color por familia en la imagen */
+    .card-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .card.pan  .card-img-wrap::after { background: var(--c-pan); }
+    .card.fiam .card-img-wrap::after { background: var(--c-fiam); }
+    .card.queso .card-img-wrap::after { background: var(--c-queso); }
+
+    .card-body {
+      padding: 1rem 1.1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-cat {
+      font-size: .63rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: .35rem;
+    }
+
+    .card-cat.pan   { color: var(--c-pan); }
+    .card-cat.fiam  { color: var(--c-fiam); }
+    .card-cat.queso { color: var(--c-queso); }
+
+    .card-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--blanco);
+      line-height: 1.2;
+      margin-bottom: .35rem;
+    }
+
+    .card-marca {
+      font-size: .68rem;
+      color: var(--gris-txt);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      opacity: .7;
+    }
+
+    .card-desc {
+      font-size: .78rem;
+      color: #8A8A92;
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: .9rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      margin-top: auto;
+    }
+
+    .card .badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  backdrop-filter: blur(6px);
+}
+
+    .card-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blanco);
+      letter-spacing: .02em;
+    }
+
+    .card-price.sin-precio {
+      font-size: .72rem;
+      color: var(--gris-txt);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .precio-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.precio-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.precio-label {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 3px;
+}
+
+.precio-normal {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--blanco);
+}
+
+.precio-mayorista {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--blanco);
+}
+
+    .badge {
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: .22rem .65rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+   .badge-avail { 
+  background: rgba(76, 153, 76, 0.85);
+  color: #0b0b0b;
+  border: 1px solid #ebefed;
+  backdrop-filter: blur(6px);
+}
+    .badge-unavail {
+  background: #000;
+  color: #ff5a5a;
+  border: 1px solid #ff5a5a;
+}
+
+    /* ── EMPTY ── */
+    .empty {
+      text-align: center;
+      padding: 5rem 1rem;
+      color: var(--gris-txt);
+    }
+
+    .empty .emoji { font-size: 2.5rem; display: block; margin-bottom: .75rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gris-osc);
+      border-top: 1px solid var(--gris-brd);
+      color: var(--gris-txt);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: .82rem;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer strong { color: var(--blanco); font-weight: 600; }
+
+    footer .footer-accent {
+  color: var(--naranja);
+  text-decoration: none;
+  transition: .2s;
+}
+
+footer .footer-accent:hover {
+  color: var(--naranja2);
+  opacity: .9;
+}
+
+    footer .footer-logo {
+      margin-bottom: 1rem;
+      opacity: .5;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      color: var(--blanco);
+      text-transform: uppercase;
+    }
+
+    .footer-sep {
+      display: inline-block;
+      width: 4px; height: 4px;
+      background: var(--naranja);
+      border-radius: 50%;
+      vertical-align: middle;
+      margin: 0 .6rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .familias { grid-template-columns: 1fr; }
+      .familia-tab { border-right: none; border-bottom: 1px solid var(--gris-brd); }
+      .familia-tab:last-child { border-bottom: none; }
+      nav button { font-size: .78rem; padding: .35rem .75rem; }
+      .hero { padding: 3rem 1.2rem 2.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+    }
+
+    /* ══ BOTÓN AGREGAR (card) ══ */
+    .btn-agregar {
+      width: 100%;
+      margin-top: .75rem;
+      padding: .55rem 1rem;
+      border-radius: 6px;
+      border: none;
+      background: var(--naranja);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .18s, transform .12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+    }
+    .btn-agregar:hover  { background: var(--naranja2); }
+    .btn-agregar:active { transform: scale(.97); }
+    .btn-agregar:disabled { background: var(--gris-brd); color: var(--gris-txt); cursor: not-allowed; }
+    .card.pan   .btn-agregar { background: var(--c-pan); }
+    .card.fiam  .btn-agregar { background: var(--c-fiam); }
+    .card.queso .btn-agregar { background: var(--c-queso); }
+    .card.pan   .btn-agregar:hover { background: #e85530; }
+    .card.fiam  .btn-agregar:hover { background: #d44f3f; }
+    .card.queso .btn-agregar:hover { background: #e0961a; }
+
+    /* ══ FAB CARRITO ══ */
+    #cart-fab {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--naranja);
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(217,74,30,.45);
+      transition: transform .2s, background .2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #cart-fab:hover { background: var(--naranja2); transform: scale(1.08); }
+
+    #cart-count {
+      position: absolute;
+      top: -4px; right: -4px;
+      background: #fff;
+      color: var(--naranja);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem;
+      font-weight: 800;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: none;
+      align-items: center; justify-content: center;
+    }
+
+    /* ══ OVERLAY + PANEL ══ */
+    #cart-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+    #cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    #cart-panel {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(420px, 100vw);
+      height: 100vh;
+      background: var(--gris-osc);
+      border-left: 1px solid var(--gris-brd);
+      z-index: 301;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+    }
+    #cart-panel.open { transform: translateX(0); }
+
+    .cart-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--gris-brd);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .cart-header h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--blanco);
+    }
+    #cart-close {
+      background: none; border: none;
+      color: var(--gris-txt);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: .2rem;
+      transition: color .15s;
+    }
+    #cart-close:hover { color: var(--blanco); }
+
+    #cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.5rem;
+    }
+    #cart-items::-webkit-scrollbar { width: 4px; }
+    #cart-items::-webkit-scrollbar-thumb { background: var(--gris-brd); border-radius: 2px; }
+
+    .cart-empty-msg {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--gris-txt);
+      font-size: .9rem;
+    }
+    .cart-empty-msg .emoji { font-size: 2rem; display: block; margin-bottom: .5rem; }
+
+    .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-controls button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-controls .qty {
+  min-width: 20px;
+  text-align: center;
+}
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: .8rem 0;
+      border-bottom: 1px solid var(--gris-brd);
+      animation: slideIn .2s ease both;
+    }
+    .cart-item:last-child { border-bottom: none; }
+
+    .ci-emoji { font-size: 1.6rem; flex-shrink: 0; width: 40px; text-align: center; }
+    .ci-info  { flex: 1; min-width: 0; }
+    .ci-name  {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .95rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .04em;
+      color: var(--blanco);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ci-marca  { font-size: .65rem; color: var(--gris-txt); letter-spacing: .1em; text-transform: uppercase; }
+    .ci-precio { font-family: 'Barlow Condensed', sans-serif; font-size: .9rem; font-weight: 600; color: var(--naranja2); margin-top: .1rem; }
+
+    .ci-qty {
+      display: flex; align-items: center; gap: .3rem; flex-shrink: 0;
+    }
+    .ci-qty button {
+      width: 26px; height: 26px;
+      border-radius: 4px;
+      border: 1px solid var(--gris-brd);
+      background: var(--gris-med);
+      color: var(--blanco);
+      font-size: .95rem; font-weight: 700;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ci-qty button:hover { background: var(--gris-brd); border-color: var(--naranja); }
+    .ci-qty span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      min-width: 22px; text-align: center;
+      color: var(--blanco);
+    }
+    .ci-remove {
+      background: none; border: none;
+      color: var(--gris-txt);
+      cursor: pointer; font-size: 1rem;
+      padding: .2rem;
+      transition: color .15s; flex-shrink: 0;
+    }
+    .ci-remove:hover { color: #e74c3c; }
+
+    .cart-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--gris-brd);
+      flex-shrink: 0;
+    }
+    .cart-total {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem;
+    }
+    .cart-total span { font-size: .78rem; color: var(--gris-txt); text-transform: uppercase; letter-spacing: .1em; }
+    .cart-total strong { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--blanco); }
+
+    #btn-whatsapp {
+      width: 100%;
+      padding: .8rem 1.2rem;
+      border-radius: 8px; border: none;
+      background: #25D366; color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background .18s, transform .12s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    #btn-whatsapp:hover { background: #1ebe5a; }
+    #btn-whatsapp:active { transform: scale(.98); }
+
+    #btn-vaciar {
+      width: 100%; margin-top: .6rem;
+      padding: .55rem;
+      border-radius: 6px;
+      border: 1px solid var(--gris-brd);
+      background: transparent; color: var(--gris-txt);
+      font-family: 'Barlow', sans-serif;
+      font-size: .78rem; cursor: pointer;
+      transition: border-color .15s, color .15s;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    #btn-vaciar:hover { border-color: #e74c3c; color: #e74c3c; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(12px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo-wrap"> 
+  <img src="Isologo-Gigus-01-copia.png" class="logo-svg" alt="Logo Gigus">
+  
+  <div class="logo-text">
+    <h1>Gigus</h1>
+    <span>Distribuciones S.A.S.</span>
+  </div>
+</div>
+<div class="search-bar">
+    <span class="icon">🔍</span>
+    <input type="text" id="search" placeholder="Buscar producto..." autocomplete="off" />
+  </div>
+  <nav id="nav">
+    <button class="active" data-cat="todos">Todos</button>
+    <button data-cat="panificados">Panificados</button>
+    <button data-cat="fiambres">Fiambres</button>
+    <button data-cat="quesos">Quesos</button>
+    <button data-cat="bonafide">Bonafide</button>
+    <button data-cat="riojanita">Riojanita</button>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-text"></div>
+  <div class="hero-inner">
+  <div class="hero-eyebrow">CATÁLOGO DE PRODUCTOS 2026</div>
+
+  <h2>
+    Distribuyendo <span>calidad</span><br>
+  </h2>
+
+  <p>
+    🧀 A DEFINIR.<br>
+    🚚 Entregas rápidas en la Ciudad de Santiago del Estero.<br>
+    📲 Pedí fácil por WhatsApp.
+  </p>
+
+  
+</div>
+</section>
+
+<div id="img-modal" class="img-modal">
+  <span id="img-close">&times;</span>
+  <img id="img-modal-content">
+</div>
+
+<!-- ── BANNER FAMILIAS ── -->
+<div class="familias" id="familias-bar">
+  <div class="familia-tab" data-cat="panificados">
+    <img src="logos/logopalau.png" class="fam-logo" alt="Palau">
+    <div class="fam-info">
+      <div class="fam-name">Panificados</div>
+      <div class="fam-brand">Palau</div>
+    </div>
+  </div>
+  <div class="familia-tab" data-cat="fiambres">
+    <img src="logos/logotivarello.png" class="fam-logo" alt="Tivarello">
+    <div class="fam-info">
+      <div class="fam-name">Fiambres</div>
+      <div class="fam-brand">Tivarello</div>
+    </div>
+    <img src="logos/logolario.png" class="fam-logo" alt="Lario">
+  </div>
+  <div class="familia-tab" data-cat="quesos">
+    <img src="logos/logoorcovi.png" class="fam-logo" alt="Colonia Orcoví">
+    <div class="fam-info">
+      <div class="fam-name">Quesos</div>
+      <div class="fam-brand">Colonia Orcoví</div>
+    </div>
+  </div>
+  <div class="familia-tab" data-cat="bonafide">
+    <img src="logos/logobonafide.png" class="fam-logo" alt="Bonafide">
+    <div class="fam-info">
+      <div class="fam-name">Bonafide</div>
+      <div class="fam-brand">Cafe & Chocolates</div>
+    </div>
+  </div>
+  <div class="familia-tab" data-cat="riojanita">
+    <img src="logos/logoriojanita.png" class="fam-logo" alt="Riojanita">
+    <div class="fam-info">
+      <div class="fam-name">Riojanita</div>
+      <div class="fam-brand">Conservas</div>
+    </div>
+  </div>
+  <div class="familia-tab" data-cat="ofertas">
+    <img src="logos/logoofertas.png" class="fam-logo" alt="Ofetas">
+    <div class="fam-info">
+      <div class="fam-name">Ofertas</div>
+      <div class="fam-brand">Imperdibles</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main>
+  <div class="section-header">
+    <div class="section-title" id="section-label">Todos los productos</div>
+    <div class="section-count" id="section-count"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">
+    <span class="emoji">📦</span>
+    No encontramos productos que coincidan con tu búsqueda.
+  </div>
+</main>
+
+<!-- ── CARRITO FLOTANTE ── -->
+<button id="cart-fab" title="Ver pedido">
+  🛒
+  <span id="cart-count"></span>
+</button>
+
+<!-- ── OVERLAY ── -->
+<div id="cart-overlay"></div>
+
+<!-- ── PANEL CARRITO ── -->
+<div id="cart-panel">
+  <div class="cart-header">
+    <h3>🛒 Tu Pedido</h3>
+    <button id="cart-close">✕</button>
+  </div>
+  <div id="cart-items">
+    <div class="cart-empty-msg">
+      <span class="emoji">📦</span>
+      Todavía no agregaste productos.
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total estimado</span>
+      <strong id="cart-total-txt">—</strong>
+    </div>
+    <button id="btn-whatsapp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar pedido por WhatsApp
+    </button>
+    <button id="btn-vaciar">Vaciar pedido</button>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<!-- ── FOOTER ── -->
+<!-- ── FOOTER ── -->
+<footer>
+
+  <div style="
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    margin-bottom:1rem;
+    flex-wrap:wrap;
+  ">
+
+    <img src="Isologo-Gigus-01-copia.png"
+         alt="Gigus"
+         style="width:70px; opacity:.9;">
+
+    <strong style="
+      font-size:1.2rem;
+      color:white;
+      font-family:'Barlow Condensed', sans-serif;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    ">
+      Gigus Distribuciones S.A.S.
+    </strong>
+
+  </div>
+
+  📍 Colon N°388, Santiago del Estero, Argentina
+
+  <div style="
+    margin-top:1rem;
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+    flex-wrap:wrap;
+  ">
+
+    <a href="https://wa.me/5493854991540"
+       class="footer-accent"
+       target="_blank">
+       WhatsApp
+    </a>
+
+    <span class="footer-sep"></span>
+
+    <a href="https://instagram.com/gigusdistribuciones"
+       class="footer-accent"
+       target="_blank">
+       Instagram
+    </a>
+
+    <span class="footer-sep"></span>
+
+    <a href="mailto:gigusdistribuciones@gmail.com"
+       class="footer-accent">
+       Email
+    </a>
+
+  </div>
+
+  <small style="
+    opacity:.5;
+    font-size:.72rem;
+    display:block;
+    margin-top:1rem;
+  ">
+    Atención personalizada · Pedidos por WhatsApp · Catálogo 2026
+  </small>
+
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+//  CATÁLOGO DE PRODUCTOS — GIGUS DISTRIBUCIONES
+//  Para agregar o editar productos, modificá el array de abajo.
+//
+//  CAMPOS:
+//   nombre     → nombre del producto
+//   familia    → "panificados" | "fiambres" | "quesos"
+//   marca      → Palau / Tivarello / Colonia Orcoví
+//   desc       → descripción breve (presentación, uso, etc.)
+//   precio     → "$1.200" o "" si no tiene precio todavía
+//   disponible → true / false
+//   emoji      → ícono de respaldo si no hay foto
+//   img        → ruta a la imagen, ej: "imagenes/pan_frances.jpg"
+//                Dejá "" si todavía no hay foto.
+// ══════════════════════════════════════════════════════════════════
+const productos = [
+
+  // ── PANIFICADOS PALAU ──────────────────────────────────────────
+  {
+    id: 1,
+    nombre: "Pan Francés",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Clásico pan de miga suave y corteza crocante. Por kilogramo.",
+    precio: "$2.070",
+    disponible: true,
+    emoji: "🥖",
+    img: "imagenes_productos_palau/pan_frances.JPG"
+  },
+  {
+    id: 2,
+    nombre: "Pan Lactal x 360 Salvado",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Esponjoso, suave y de larga vida útil. Por paquete.",
+    precio: "$2.200",
+    disponible: true,
+    emoji: "🍞",
+    img: "imagenes_productos_palau/lactal360salvado.JPG"
+  },
+  {
+    id: 3,
+    nombre: "Medialunas Dulces",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Hojaldradas, doradas y con toque de brillo. Por docena.",
+    precio: "$4.150",
+    disponible: true,
+    emoji: "🥐",
+    img: "imagenes_productos_palau/medialunasdulces.JPG"
+  },
+  {
+    id: 4,
+    nombre: "Bizcochos de Grasa",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Tiernos por dentro, dorados por fuera. Por kilogramos.",
+    precio: "$5.600",
+    disponible: true,
+    emoji: "🫓",
+    img: "imagenes_productos_palau/bizcochosgrasa.JPG"
+  },
+  {
+    id: 5,
+    nombre: "Pan de Hamburguesa",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Esponjoso y resistente. Paquete x 4 unidades.",
+    precio: "$1.350",
+    disponible: true,
+    emoji: "🍔",
+    img: "imagenes_productos_palau/panhamburguesa.JPG"
+  },
+  {
+    id: 6,
+    nombre: "Pan de Pebete",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Suave y ligeramente dulce. Paquete x 6 unidades.",
+    precio: "$1.350",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pebete3.JPG"
+  },
+   {
+    id: 7,
+    nombre: "Vigilante",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Con crema pastelera y menbrillo. Por caja congelado x 126u..",
+    precio: "$46.750",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/vigilante.JPG"
+  },
+   {
+    id: 8,
+    nombre: "Pepas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$8.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pepas.JPG"
+  },
+   {
+    id: 9,
+    nombre: "Bizcochos de miel",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$8.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/bizcochos-miel.JPG"
+  },
+
+  // ── FIAMBRES TIVARELLO ─────────────────────────────────────────
+  {
+    id: 10,
+    nombre: "Jamón Cocido",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $9.912,32.",
+    precio: "$44.605,44",
+    precioMayorista: "$45.514,56",
+    disponible: true,
+    emoji: "🥩",
+    img: "imagenes_fiambres_tivarelo/jamon_cocido.jpg"
+     
+  },
+  {
+    id: 11,
+    nombre: "Salame Tipo Milan",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $12.855,04.",
+    precio: "$20.568,06",
+    precioMayorista: "$19.603,94",
+    disponible: true,
+    emoji: "🍖",
+    img: "imagenes_fiambres_tivarelo/salame_tipomilan.jpg"
+  },
+  {
+    id: 12,
+    nombre: "Salame Picado Fino",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $19.654,27.",
+    precio: "$2.358,51",
+    precioMayorista: "$2.247,96",
+    disponible: true,
+    emoji: "🥩",
+    img: "imagenes_fiambres_tivarelo/salame_picadofino.jpg"
+  },
+  {
+    id: 13,
+    nombre: "Mortadela",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $5885,44.",
+    precio: "$15.890,69",
+    precioMayorista: "$15.145,81",
+    disponible: true,
+    emoji: "🍖",
+    img: "imagenes_fiambres_tivarelo/mortadela.jpg"
+  },
+  {
+    id: 14,
+    nombre: "Fiambre para Emparedado",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $5.420,80.",
+    precio: "$24.664,64",
+    precioMayorista: "$23.508,49",
+    disponible: true,
+    emoji: "🥩",
+    img: "imagenes_fiambres_tivarelo/emparedado.jpg"
+  },
+  {
+    id: 15,
+    nombre: "Bondiola",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $20.134,40.",
+    precio: "$28.792,19",
+    precioMayorista: "$27.442,56",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/bondiola1.jpg"
+  },
+  {
+    id: 16,
+    nombre: "Salame Tipo Campo",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $21.154,37.",
+    precio: "$2.538,52",
+    precioMayorista: "$2.419,53",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/salame_tipocampo.jpg"
+  },
+  {
+    id: 17,
+    nombre: "Salame Picado Grueso",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $20.591,31",
+    precio: "$2.470,96",
+    precioMayorista: "$2.355,13",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/salame_picadogrueso.jpg"
+  },
+  {
+    id: 18,
+    nombre: "Panceta Salada",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $17.609,86",
+    precio: "$14.087,88",
+    precioMayorista: "$13.427,52",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/panceta_ahumada.jpg"
+  },
+  {
+    id: 19,
+    nombre: "Salchichon",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $6.814,72",
+    precio: "$18.399,74",
+    precioMayorista: "$17.537,26",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/salchichon-primavera.jpg"
+  },
+   
+  // ── QUESOS COLONIA ORCOVÍ ─────────────────────────────────────
+  {
+    id: 20,
+    nombre: "Queso Por Salut",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $9.439,13.",
+    precio: "$35.868,68",
+    precioMayorista: "$34.692,65",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/porsalut.jpg"
+  },
+  {
+    id: 21,
+    nombre: "Queso Cuartirolo",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $8.060,88",
+    precio: "$30.631,33",
+    precioMayorista: "$29.627,02",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/cuartirolo.jpg"
+  },
+  {
+    id: 22,
+    nombre: "Queso Mozzarella",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $9.471,56",
+    precio: "$38.833,41",
+    precioMayorista: "$37.560,18",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/mozza.jpg"
+  },
+  {
+    id: 23,
+    nombre: "Queso Cheddar",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $11.157,02",
+    precio: "$50.206,58",
+    precioMayorista: "$48.560,46",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/cheddar.jpg"
+  },
+  {
+    id: 24,
+    nombre: "Queso Fynbo",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $15.540,02.",
+    precio: "$77.700,11",
+    precioMayorista: "$75.152,56",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/fynbo.jpg"
+  },
+  {
+    id: 25,
+    nombre: "Queso Tybo",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $10.562,93",
+    precio: "$44.364,32",
+    precioMayorista: "$42.909,76",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/tybo.jpg"
+  },
+  {
+    id: 26,
+    nombre: "Queso Pategras",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $15.405,01.",
+    precio: "$77.025,05",
+    precioMayorista: "$74.499,64",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/pategras.jpg"
+  },
+  {
+    id: 27,
+    nombre: "Queso Sardo",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $15.763,05.",
+    precio: "$55.170,68",
+    precioMayorista: "$53.361,80",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/sardo.jpg"
+  },
+  {
+    id: 28,
+    nombre: "Queso Sardo Estacionado",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $17.711,90.",
+    precio: "$53.135,69",
+    precioMayorista: "$51.393,54",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/estacionado.jpg"
+  },
+  {
+    id: 29,
+    nombre: "Queso Romano",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $19.209,79",
+    precio: "$96.048,94",
+    precioMayorista: "$92.899,80",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/romano.jpg"
+  },
+  {
+    id: 30,
+    nombre: "Dulce de Leche Clásico",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En pote 200g.",
+    precio: "$1.066,86",
+    precioMayorista: "$1.049,40",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/clasico-pote.jpg"
+  },
+  {
+    id: 31,
+    nombre: "Dulce de Leche Repostero",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Denso y firme para pastelería. En pote 400g.",
+    precio: "$1.981,68",
+    precioMayorista: "$1.949,19",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/repostero.jpg"
+  },
+  {
+    id: 32,
+    nombre: "Crema de Leche",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Pasteurizada. En pote 200CC.",
+    precio: "$1.865,31",
+    precioMayorista: "$1.834,73",
+    disponible: true,
+    emoji: "🥛",
+    img: "imagenes_quesos_orcovi/crema-pote.jpg"
+  },
+  {
+    id: 33,
+    nombre: "Orcoví Cream Untable",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Cremoso y versátil. En pote 290g.",
+    precio: "$2.006,33",
+    precioMayorista: "$1.973,44",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/crema-pote.jpg"
+  },
+  {
+    id: 34,
+    nombre: "Chorizo",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $9.602,56",
+    precio: "$4.321,15",
+    precioMayorista: "$4.118,60",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/chorizo.jpg"
+  },
+  {
+    id: 35,
+    nombre: "Morcilla",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $7.881,84",
+    precio: "",
+    disponible: false,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/morcilla.jpg"
+  },
+  {
+    id: 36,
+    nombre: "Fiambre Pata de Cerdo",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $6.969,60",
+    precio: "$32.060,16",
+    precioMayorista: "$30.557,34",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/fiambre-de-pata-de-cerdo.jpg"
+  },
+  {
+    id: 37,
+    nombre: "Queso de Cerdo",
+    familia: "fiambres",
+    marca: "Tivarello",
+    desc: "Precio por KG $6.055,81",
+    precio: "$27.251,14",
+    precioMayorista: "$25.973,74",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_fiambres_tivarelo/quesocerdo.jpg"
+  },
+  {
+    id: 38,
+    nombre: "Alfajor de Hojaldre",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$2.400",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/alfajorhojaldre.JPG"
+  },
+  {
+    id: 39,
+    nombre: "Alfajor de Maicena",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$930",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/alfajormaicena.JPG"
+  },
+   {
+    id: 40,
+    nombre: "Anillo Crocante",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$12.100",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/anillocrocante.JPG"
+  },
+  {
+    id: 41,
+    nombre: "Tortilla Cremona",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$1.370",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cremona.JPG"
+  },
+  {
+    id: 42,
+    nombre: "Pan Criollo",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$2.400",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/criollos.JPG"
+  },
+  {
+    id: 43,
+    nombre: "Chipaco",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$1.300",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/chipaco.JPG"
+  },
+   {
+    id: 44,
+    nombre: "Facturas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por docena",
+    precio: "$5.000",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/factura.JPG"
+  },
+   {
+    id: 45,
+    nombre: "Grisines",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$6.500",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/grisines.JPG"
+  },
+   {
+    id: 46,
+    nombre: "Marineras de Agua",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$6.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/marineras-agua.JPG"
+  },
+   {
+    id: 47,
+    nombre: "Marineras con Semillas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$8.400",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/marineras-semillas.JPG"
+  },
+   {
+    id: 48,
+    nombre: "Bizcochos Negros",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$8.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/bizcocho-negro.JPG"
+  },
+   {
+    id: 49,
+    nombre: "Pan de Campo",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$1.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pancampo.JPG"
+  },
+   {
+    id: 50,
+    nombre: "Pan Artesanal Avena",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$3.500",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/artesanal-avena.JPG"
+  },
+   {
+    id: 51,
+    nombre: "Pan Artesanal Semillas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$3.500",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/artesanal-semillas.JPG"
+  },
+   {
+    id: 52,
+    nombre: "Pan Lacteado Semillas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$3.500",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/lactal-semillas.JPG"
+  },
+   {
+    id: 53,
+    nombre: "Pan Lacteado Sesamo",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$3.500",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/lactalsesamo.JPG"
+  },
+   {
+    id: 54,
+    nombre: "Pan Salvado Redondo",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 9 unidades",
+    precio: "$1.450",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pan_salvadox9.JPG"
+  },
+   {
+    id: 55,
+    nombre: "Pan Lactal x 600",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete",
+    precio: "$2.650",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/lactal-600.JPG"
+  },
+   {
+    id: 56,
+    nombre: "Palmeritas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$9.300",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/palmeritas.JPG"
+  },
+   {
+    id: 57,
+    nombre: "Pan Panchos",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 6",
+    precio: "$1.350",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pancho.JPG"
+  },
+   {
+    id: 58,
+    nombre: "Pizzetas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 8u",
+    precio: "$2.300",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pizzetas.JPG"
+  },
+   {
+    id: 59,
+    nombre: "Prepizzas x 2",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 2u",
+    precio: "$1.940",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/prepizzax2.JPG"
+  },
+   {
+    id: 60,
+    nombre: "Prepizzas x 3",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 3u",
+    precio: "$2.200",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/prepizzasx3.JPG"
+  },
+   {
+    id: 61,
+    nombre: "Pan Pebeton",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 12u",
+    precio: "$4.340",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pebeton.JPG"
+  },
+   {
+    id: 62,
+    nombre: "Scone Común",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$8.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/scone.JPG"
+  },
+   {
+    id: 63,
+    nombre: "Scone con Chips",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$8.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/scone-chips.JPG"
+  },
+ {
+    id: 64,
+    nombre: "Panal",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por caja de congelados x 126u",
+    precio: "$46.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/panal.JPG"
+  },
+ {
+    id: 65,
+    nombre: "Sacramento con Dulce de Leche",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por caja de congelados x 126u",
+    precio: "$52.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/sacramentos.JPG"
+  },
+
+   // ── CAFE & CHOCOLATES ─────────────────────────────────────────
+  {
+    id: 66,
+    nombre: "Nugaton Leche",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Por caja de 88 unidades de 27 GR.",
+    precio: "$645,38",
+    precioMayorista: "$634,62",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/nugatonleche.JPG"
+  },
+  {
+    id: 69,
+    nombre: "Nugaton Black",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Por caja de 88 unidades de 27 GR.",
+    precio: "$645,38",
+    precioMayorista: "$634,62",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/nugatonblack.JPG"
+  },
+  {
+    id: 70,
+    nombre: "Bocadito Dulce de Leche",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Pack por 8 cajas de 24 unidades de 16 GR.",
+    precio: "$12879,66",
+    precioMayorista: "$12694,99",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/bocadito.JPG"
+  },
+  {
+    id: 80,
+    nombre: "Café en saquitos Intenso",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 24 saquitos de 8 GR.",
+    precio: "$4000,00",
+    precioMayorista: "$4000,00",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/cafesaquito.JPG"
+  },
+  {
+    id: 81,
+    nombre: "Café Tostado Equilibrado",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 6 unidades de 200 GR.",
+    precio: "$7308,00",
+    precioMayorista: "$7308,00",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/cafeequilibrado.JPG"
+  },
+  {
+    id: 82,
+    nombre: "Café Tostado Intenso",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 6 unidades de 200 GR.",
+    precio: "$7308,00",
+    precioMayorista: "$7308,00",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/cafeintenso.JPG"
+  },
+  {
+    id: 83,
+    nombre: "Café Cápsulas Cortado Tipo DG",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Pack de 4 cajas de 10 cápsulas de 6.25 GR.",
+    precio: "$7455,61",
+    precioMayorista: "$7331,33",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/cafecapsulacortado.JPG"
+  },
+  {
+    id: 84,
+    nombre: "Café Cápsulas Expresso Tipo DG",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Pack de 4 cajas de 10 cápsulas de 6 GR.",
+    precio: "$7455,61",
+    precioMayorista: "$7331,33",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/cafecapsulaexpresso.JPG"
+  },
+  {
+    id: 85,
+    nombre: "Chocman Baño Semiamargo",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 18 unidades de 35 GR.",
+    precio: "$641,73",
+    precioMayorista: "$631,03",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/chocmansemi.JPG"
+  },
+  {
+    id: 86,
+    nombre: "Chocman Black",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 18 unidades de 35 GR.",
+    precio: "$641,73",
+    precioMayorista: "$631,03",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/chocmanblack.JPG"
+  },
+{
+    id: 87,
+    nombre: "Chocman Coco",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 18 unidades de 35 GR.",
+    precio: "$641,73",
+    precioMayorista: "$631,03",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/chocmancoco.JPG"
+  },
+  {
+    id: 88,
+    nombre: "Donuts Blanca",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 24 unidades de 78 GR.",
+    precio: "$1638,34",
+    precioMayorista: "$1611,03",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/donutsblanca.JPG"
+  },
+  {
+    id: 89,
+    nombre: "Donuts Leche",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 24 unidades de 78 GR.",
+    precio: "$1638,34",
+    precioMayorista: "$1611,03",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/donutsleche.JPG"
+  },
+   {
+  id: 90,
+    nombre: "Mecano",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Pack de 8 cajas de 24 unidades de 19 GR.",
+    precio: "$16282,08",
+    precioMayorista: "$16610,71",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/mecano.JPG"
+    },
+    {
+  id: 91,
+    nombre: "Tableta Leche y Maní",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Pack de 6 cajas de 20 unidades de 30 GR.",
+    precio: "$13513,92",
+    precioMayorista: "$13288,69",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/tableta.JPG"
+    },
+    {
+  id: 92,
+    nombre: "Vizzio Maní Crocante",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 24 unidades de 80 GR.",
+    precio: "$2110,47",
+    precioMayorista: "$2075,30",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/vizziomani.JPG"
+    },
+    {
+  id: 93,
+    nombre: "Vizzio Nugaton",
+    familia: "bonafide",
+    marca: "Bonafide",
+    desc: "Caja de 24 unidades de 80 GR.",
+    precio: "$2367,60",
+    precioMayorista: "$2328,14",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_bonafide/vizzionugaton.JPG"
+    },
+
+   // ── CONSERVAS ─────────────────────────────────────────
+   {
+    id: 67,
+    nombre: "Aceitunas Negras",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "N°0 x 5 KG.",
+    precio: "$70715,04",
+    precioMayorista: "$69516,48",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasnegras.JPG"
+  },
+{
+    id: 94,
+    nombre: "Aceitunas Negras",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "N°1 x 2.4 KG.",
+    precio: "$33873,08",
+    precioMayorista: "$33298,33",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasnegras2.JPG"
+  },
+  {
+    id: 95,
+    nombre: "Aceitunas Negras",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "N°1 x 5 KG.",
+    precio: "$58150,40",
+    precioMayorista: "$57164,80",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasnegras3.JPG"
+  },
+  {
+    id: 96,
+    nombre: "Aceitunas Verdes Descarozadas",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Por 2.4 KG.",
+    precio: "$28438,00",
+    precioMayorista: "$27956,00",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasverdes.JPG"
+  },
+  {
+    id: 97,
+    nombre: "Aceitunas Verdes",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "N°1 x 2.4 KG.",
+    precio: "$18065,80",
+    precioMayorista: "$17759,60",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasverdes1.JPG"
+  },
+  {
+    id: 98,
+    nombre: "Aceitunas Verdes",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "N°0 x 5 KG.",
+    precio: "$42626,32",
+    precioMayorista: "$41903,84",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasverdes2.JPG"
+  },
+  {
+    id: 99,
+    nombre: "Aceitunas Verdes",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "N°1 x 5 KG.",
+    precio: "$35607,68",
+    precioMayorista: "$35004,16",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasverdes3.JPG"
+  },
+  {
+    id: 100,
+    nombre: "Aceitunas Verdes Rellenas con Morrón",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Por 2.4 KG.",
+    precio: "$44132,00",
+    precioMayorista: "$43384,00",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasmorron.JPG"
+  },
+  {
+    id: 101,
+    nombre: "Aceitunas Verdes Rodajas",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Por 5 KG.",
+    precio: "$53087,02",
+    precioMayorista: "$52187,24",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/aceitunasrodajas.JPG"
+  },
+  {
+    id: 102,
+    nombre: "Batata Vainilla",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Lata x 5 KG.",
+    precio: "$17169,00",
+    precioMayorista: "$16878,00",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/batata.JPG"
+  },
+  {
+    id: 103,
+    nombre: "Batata con Chocolate",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Cajón x 5 KG.",
+    precio: "$12136,30",
+    precioMayorista: "$11930,60",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/batatachocolate.JPG"
+  },
+  {
+    id: 104,
+    nombre: "Batata con Chocolate",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Lata x 5 KG.",
+    precio: "$17169,00",
+    precioMayorista: "$16878,00",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/batatachocolate2.JPG"
+  },
+  {
+    id: 105,
+    nombre: "Batata Vainilla",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Cajón x 5 KG.",
+    precio: "$12136,30",
+    precioMayorista: "$11930,60",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/batatavainilla.JPG"
+  },
+  {
+    id: 106,
+    nombre: "Membrillo",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Lata x 5 KG.",
+    precio: "$20798,68",
+    precioMayorista: "$20446,16",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/membrillo.JPG"
+  },
+  {
+    id: 107,
+    nombre: "Membrillo",
+    familia: "conservas",
+    marca: "Riojanita",
+    desc: "Cajón x 5 KG.",
+    precio: "$15629,28",
+    precioMayorista: "$15423,36",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_riojanita/membrillo2.JPG"
+  },
+   // ── FIAMBRES LARIO ─────────────────────────────────────────
+  {
+    id: 68,
+    nombre: "Bondiola Lario",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$36865,13",
+    precioMayorista: "$35927,88",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/bondiola.JPG"
+  },
+   {
+    id: 108,
+    nombre: "Fiambre de Cerdo Paleta",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$52881,52",
+    precioMayorista: "$51537,04",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/cerdopaleta.JPG"
+  },
+   {
+    id: 109,
+    nombre: "Fiambre Pata Cerdo",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$59825,29",
+    precioMayorista: "$58372,53",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/patacerdo.JPG"
+  },
+   {
+    id: 110,
+    nombre: "Jamón Cocido",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$75902,61",
+    precioMayorista: "$73972,88",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/jamoncocido.JPG"
+  },
+   {
+    id: 111,
+    nombre: "Jamón Crudo",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$90263,23",
+    precioMayorista: "$87968,40",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/jamoncrudo.JPG"
+  },
+   {
+    id: 112,
+    nombre: "Morcillón",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$18397,09",
+    precioMayorista: "$17929,37",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/morcillon.JPG"
+  },
+   {
+    id: 113,
+    nombre: "Jalea Pote",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por 1kg aprox.",
+    precio: "$3.910",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/jalea.JPG"
+  },
+   {
+    id: 114,
+    nombre: "Mortadela",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$27678,73",
+    precioMayorista: "$26975,03",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/mortadela.JPG"
+  },
+   {
+    id: 115,
+    nombre: "Mortadela 66",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$24492,81",
+    precioMayorista: "$23870,11",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/mortadela66.JPG"
+  },
+   {
+    id: 116,
+    nombre: "Paleta 66",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "Oval de 3.8 KG",
+    precio: "$30518,79",
+    precioMayorista: "$29742,89",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/paleta66.JPG"
+  },
+   {
+    id: 117,
+    nombre: "Salame",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$53548,67",
+    precioMayorista: "$52187,26",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/salame.JPG"
+  },
+   {
+    id: 118,
+    nombre: "Salame Crespón",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$77424,25",
+    precioMayorista: "$75455,84",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/salamecrespon.JPG"
+  },
+   {
+    id: 119,
+    nombre:"Salame Milan 66",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$15487,57",
+    precioMayorista: "$15093,82",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/salame66.JPG"
+  },
+   {
+    id: 120,
+    nombre: "Salchicha 66",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$1057,21",
+    precioMayorista: "$1030,34",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/salchicha66.JPG"
+  },
+   {
+    id: 121,
+    nombre: "Salchica Lario",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "Por 6 unidades",
+    precio: "$1867,56",
+    precioMayorista: "$1820,08",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/salchicha.JPG"
+  },
+   {
+    id: 122,
+    nombre: "Salchichones",
+    familia: "fiambres",
+    marca: "Lario",
+    desc: "",
+    precio: "$17028,28",
+    precioMayorista: "$16595,36",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_lario/salchichones.JPG"
+  },
+   {
+    id: 123,
+    nombre: "Lengua de suegra",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$1.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/lenguadesuegra.JPG"
+  },
+   {
+    id: 124,
+    nombre: "Medialunas Saladas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por docena",
+    precio: "$5.000",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/medialuna-salada.JPG"
+  },
+   {
+    id: 125,
+    nombre: "Palitos Hojaldrados",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$9.300",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/palitos.JPG"
+  },
+   {
+    id: 126,
+    nombre: "Rosquillas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$10.600",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/rosquilla.JPG"
+  },
+  {
+    id: 127,
+    nombre: "Pan Dulce",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$2.400",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pandulce.JPG"
+  },
+  {
+    id: 128,
+    nombre: "Tucumanas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$230",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/tucumanas.JPG"
+  },
+  {
+    id: 129,
+    nombre: "Torta de Hojaldre",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$15.900",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/tortahojaldre.JPG"
+  },
+  {
+    id: 130,
+    nombre: "Torta Bizcochuelo",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$15.000",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/tortabizcochuelo.JPG"
+  },
+  {
+    id: 131,
+    nombre: "Molde",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por unidad",
+    precio: "$22.600",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/molde.JPG"
+  },
+  {
+    id: 132,
+    nombre: "Hamburguesa Lomo",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 15u",
+    precio: "$6.400",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/hamburguesalomo.JPG"
+  },
+{
+    id: 133,
+    nombre: "Pebete Especial",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 10u",
+    precio: "$3.550",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/pebeteespecial.JPG"
+  },
+{
+    id: 134,
+    nombre: "Prepizza Integral",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 2u",
+    precio: "$2.315",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/prepizzaintegral.JPG"
+  },
+{
+    id: 162,
+    nombre: "Pan Trincha",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Por kilogramo",
+    precio: "$2.250",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/trincha.JPG"
+  },
+  {
+    id: 161,
+    nombre: "Pan Baguette",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 15u",
+    precio: "$7.500",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/baguette.JPG"
+  },
+ {
+    id: 163,
+    nombre: "Pan Hojaldrado",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Paquete x 10u",
+    precio: "$5.300",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/panhojaldrado.JPG"
+  },
+  {
+    id: 164,
+    nombre: "Caja de Medialunas Dulces",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 147u",
+    precio: "$41.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+  {
+    id: 165,
+    nombre: "Caja de Medialunas Saladas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 147u",
+    precio: "$41.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+  {
+    id: 166,
+    nombre: "Caja de Medialunas c/Semillas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 147u",
+    precio: "$41.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+  {
+    id: 167,
+    nombre: "Caja de Bizcocho de Grasa",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 8kg aprox.",
+    precio: "$45.100",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+   {
+    id: 168,
+    nombre: "Caja de Chipá",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 4kg aprox.",
+    precio: "$85.000",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/chipa.JPG"
+  },
+   {
+    id: 169,
+    nombre: "Caja de Criollo Alto",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 96u",
+    precio: "$23.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+   {
+    id: 135,
+    nombre: "Caja de Facturas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 126u",
+    precio: "$49.100",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+ {
+    id: 136,
+    nombre: "Caja de Miñon se Salvado",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 6kg aprox.",
+    precio: "$18.350",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+ {
+    id: 137,
+    nombre: "Caja de Miñon",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 6kg aprox.",
+    precio: "$15.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+ {
+    id: 138,
+    nombre: "Caja de Sacramentos c/Membrillo",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 126u",
+    precio: "$47.100",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+ {
+    id: 139,
+    nombre: "Caja de Tucumanas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 320u",
+    precio: "$67.000",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/cajacongelados.JPG"
+  },
+ {
+    id: 140,
+    nombre: "Caja de Tucumanas Hojaldradas",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 320u",
+    precio: "$67.000",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/tucumanashojaldradas.JPG"
+  },
+   {
+    id: 141,
+    nombre: "Caja de Tortilla Santiagueña",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja",
+    precio: "$71.700",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/tortillasantiagueña.JPG"
+  },
+ {
+    id: 142,
+    nombre: "Caja de Caseritos y Chipaquito",
+    familia: "panificados",
+    marca: "Palau",
+    desc: "Caja x 120u",
+    precio: "$41.800",
+    disponible: true,
+    emoji: "🌭",
+    img: "imagenes_productos_palau/caseritos.JPG"
+  },
+   {
+    id: 143,
+    nombre: "Dulce de Leche Clásico",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En pote 400g.",
+    precio: "$1.971,83",
+    precioMayorista: "$1.939,50",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/clasico-pote.jpg"
+  },
+  {
+    id: 144,
+    nombre: "Dulce de Leche Clásico",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En pote 1Kg.",
+    precio: "$4.755,62",
+    precioMayorista: "$4.667,66",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/clasico-pote.jpg"
+  },
+  {
+    id: 145,
+    nombre: "Dulce de Leche Clásico",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En cuñete 1kg.",
+    precio: "$4.524,68",
+    precioMayorista: "$4.450,50",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/clasico-cuñete.jpg"
+  },
+  {
+    id: 170,
+    nombre: "Dulce de Leche Clásico",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En cuñete 3Kg.",
+    precio: "$12.339,57",
+    precioMayorista: "$12.137,28",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/clasico-cuñete.jpg"
+  },
+  {
+    id: 146,
+    nombre: "Dulce de Leche Clásico",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En cuñete 5Kg.",
+    precio: "$19.785,35",
+    precioMayorista: "$19.461,00",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/clasico-cuñete.jpg"
+  },
+  {
+    id: 147,
+    nombre: "Dulce de Leche Clásico",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En pote 10Kg.",
+    precio: "$38.084,93",
+    precioMayorista: "$37.460,58",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/clasico-cuñete.jpg"
+  },
+  {
+    id: 148,
+    nombre: "Dulce de Leche Repostero",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En pote 1kg.",
+    precio: "$4.779,39",
+    precioMayorista: "$4.701,04",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/repostero.jpg" 
+  },
+  {  
+  id: 149,
+    nombre: "Dulce de Leche Repostero",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En cuñete 1kg.",
+    precio: "$4.547,30",
+    precioMayorista: "$4.472,76",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/repostero-cuñete.jpg"
+    },
+    {  
+  id: 150,
+    nombre: "Dulce de Leche Repostero",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En cuñete 3kg.",
+    precio: "$12.401,25",
+    precioMayorista: "$12.197,95",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/repostero-cuñete.jpg"
+    }, 
+    {  
+  id: 151,
+    nombre: "Dulce de Leche Repostero",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En cuñete 5kg.",
+    precio: "$19.884,28",
+    precioMayorista: "$19.558,31",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/repostero-cuñete.jpg"
+    },
+    {  
+    id: 152,
+    nombre: "Dulce de Leche Repostero",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "100% leche de vaca. En cuñete 10kg.",
+    precio: "$38.275,31",
+    precioMayorista: "$37.647,85",
+    disponible: true,
+    emoji: "🍯",
+    img: "imagenes_quesos_orcovi/repostero-cuñete.jpg"
+    },
+    {
+    id: 153,
+    nombre: "Crema de Leche",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Pasteurizada. En pote 360CC.",
+    precio: "$3.322,47",
+    precioMayorista: "$3.268,00",
+    disponible: true,
+    emoji: "🥛",
+    img: "imagenes_quesos_orcovi/crema-pote.jpg"
+  },
+   {
+    id: 154,
+    nombre: "Crema de Leche",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Pasteurizada. En pote 740CC.",
+    precio: "$6.574,78",
+    precioMayorista: "$6.466,99",
+    disponible: true,
+    emoji: "🥛",
+    img: "imagenes_quesos_orcovi/crema-pote.jpg"
+  },
+   {
+    id: 155,
+    nombre: "Crema de Leche",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Pasteurizada. En balde 3L.",
+    precio: "$24.755,80",
+    precioMayorista: "$24.349,97",
+    disponible: true,
+    emoji: "🥛",
+    img: "imagenes_quesos_orcovi/crema-balde.jpg"
+  },
+  {
+    id: 156,
+    nombre: "Crema de Leche",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Pasteurizada. En balde 5L.",
+    precio: "$39.949,88",
+    precioMayorista: "$39.294,97",
+    disponible: true,
+    emoji: "🥛",
+    img: "imagenes_quesos_orcovi/crema-balde.jpg"
+  },
+  {
+    id: 157,
+    nombre: "Crema de Leche",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Pasteurizada. En balde 10L.",
+    precio: "$77.170,43",
+    precioMayorista: "$75.905,34",
+    disponible: true,
+    emoji: "🥛",
+    img: "imagenes_quesos_orcovi/crema-balde.jpg"
+  },
+  {
+    id: 158,
+    nombre: "Orcoví Cream Untable",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Cremoso y versátil. En Bag in Box 3K.",
+    precio: "$20.695,49",
+    precioMayorista: "$20.356,22",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/untable-box.jpg"
+  },
+  {
+    id: 159,
+    nombre: "Queso Pategras",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $15.405,01. Presentacion MEDIA ORMA",
+    precio: "$24.648,02",
+    precioMayorista: "$23.839,89",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/pategras.jpg"
+  },
+  {
+    id: 160,
+    nombre: "Queso Sardo",
+    familia: "quesos",
+    marca: "Colonia Orcoví",
+    desc: "Precio por KG $15.763,05. Presentacion MEDIA ORMA",
+    precio: "$28.373,48",
+    precioMayorista: "$27.443.21",
+    disponible: true,
+    emoji: "🧀",
+    img: "imagenes_quesos_orcovi/sardo.jpg"
+  },
+
+];
+// ══════════════════════════════════════════════════════════════════
+
+
+// ── LÓGICA DE FILTRO Y RENDER ──────────────────────────────────
+const grid    = document.getElementById('grid');
+const empty   = document.getElementById('empty');
+const label   = document.getElementById('section-label');
+const counter = document.getElementById('section-count');
+const searchI = document.getElementById('search');
+const navEl   = document.getElementById('nav');
+const famBar  = document.getElementById('familias-bar');
+
+let catActual   = 'todos';
+let queryActual = '';
+
+const FAMILIA_INFO = {
+  panificados: { nombre: 'Panificados',   marca: 'Palau',           key: 'pan',   emoji: '🥖' },
+  fiambres:    { nombre: 'Fiambres',      marca: 'Tivarello',       key: 'fiam',  emoji: '🥩' },
+  quesos:      { nombre: 'Quesos & Lácteos', marca: 'Colonia Orcoví', key: 'queso', emoji: '🧀' },
+  bonafide: { nombre: 'Bonafide', marca: 'Café & Chocolates', key: 'ofe', emoji: '☕' },
+  riojanita: { nombre: 'Riojanita', marca: 'Conservas', key: 'ofe', emoji: '🫙' },
+  ofertas: { nombre: 'Ofertas', marca: 'Imperdibles', key: 'ofe', emoji: '🔥' }
+};
+
+const CAT_LABELS = {
+  todos:       'Todos los productos',
+  panificados: 'Panificados Palau',
+  fiambres:    'Fiambres Tivarello',
+  quesos:      'Quesos Colonia Orcoví',
+  bonafide: 'Bonafide',
+  riojanita: 'Riojanita',
+  ofertas: 'Ofertas'
+};
+
+function actualizarDescripcionHero() {
+  const heroDesc = document.querySelector('.hero p');
+
+  if (!heroDesc) return;
+
+  const textos = {
+    bonafide: "☕ Café y chocolates Bonafide. Productos premium.",
+    riojanita: "🫙 Línea Riojanita. Conservas seleccionadas.",
+    ofertas: "🔥 Productos con precios especiales y promociones.",
+    todos: `
+      
+      🚚 Entregas rápidas en la Ciudad de Santiago del Estero.<br>
+      📲 Pedí fácil por WhatsApp.
+    `
+  };
+
+  heroDesc.innerHTML = textos[catActual] || textos.todos;
+}
+
+function renderCard(p) {
+  const fi = FAMILIA_INFO[p.familia] || {};
+  const key = fi.key || 'pan';
+
+  const imgHTML = p.img
+    ? `<img class="card-img" src="${p.img}" alt="${p.nombre}" loading="lazy" onclick="abrirImagen('${p.img}')" />`
+    : `<div class="card-img-placeholder"><span class="emoji">${p.emoji}</span><span>foto próximamente</span></div>`;
+
+  const precioUnitario = p.precio || "";
+const precioMayorista = p.precioMayorista || "";
+
+let precioHTML = "";
+
+if (precioUnitario || precioMayorista) {
+  precioHTML = `
+  <div class="precio-box">
+
+  <div class="precio-item">
+    <span class="precio-label">
+      ${p.familia === "panificados" ? "Precio" : "Lista 1"}
+    </span>
+
+    <span class="precio-normal">${p.precio}</span>
+  </div>
+
+  ${p.familia !== "panificados" ? `
+    <div class="precio-item">
+      <span class="precio-label">Lista 2</span>
+      <span class="precio-mayorista">${p.precioMayorista || p.precio}</span>
+    </div>
+  ` : ''}
+
+  </div>
+`;
+} else {
+  precioHTML = `<span class="card-price sin-precio">Consultar precio</span>`;
+}
+
+  const badgeHTML = p.disponible
+    ? `<span class="badge badge-avail">Disponible</span>`
+    : `<span class="badge badge-unavail">Sin stock</span>`;
+
+  const div = document.createElement('div');
+  div.className = `card ${key}`;
+  div.innerHTML = `
+    <div class="card-img-wrap"> ${imgHTML} ${badgeHTML}</div>
+    <div class="card-body">
+      <div class="card-cat ${key}">${fi.nombre || p.familia}</div>
+      <div class="card-name">${p.nombre}</div>
+      <div class="card-marca">${p.marca}</div>
+      <div class="card-desc">${p.desc}</div>
+
+${precioHTML}
+      
+      <button class="btn-agregar" data-id="${p.id}" ${!p.disponible ? 'disabled' : ''}>
+        + Agregar al pedido
+      </button>
+    </div>`;
+
+  div.querySelector('.btn-agregar')?.addEventListener('click', () => agregarAlCarrito(p.id));
+  return div;
+}
+
+function render() {
+  const q = queryActual.toLowerCase().trim();
+  let lista = productos.filter(p => {
+   const catOk =
+  catActual === 'todos' ||
+  p.familia === catActual ||
+  (catActual === 'bonafide' && p.marca === 'Bonafide') ||
+  (catActual === 'riojanita' && p.marca === 'Riojanita');
+    const qOk   = !q || p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.marca.toLowerCase().includes(q);
+    return catOk && qOk;
+  });
+
+  grid.innerHTML = '';
+
+  if (lista.length === 0) {
+    empty.style.display = 'block';
+    counter.textContent = '';
+    return;
+  }
+
+  empty.style.display = 'none';
+  counter.textContent = `${lista.length} producto${lista.length !== 1 ? 's' : ''}`;
+  label.textContent = CAT_LABELS[catActual] || 'Productos';
+
+  actualizarDescripcionHero();
+
+
+
+  // Si muestra "todos", agrupa por familia con separadores
+  if (catActual === 'todos' && !q) {
+    const orden = ['panificados', 'fiambres', 'quesos', 'bonafide'];
+    let animIdx = 0;
+    orden.forEach(fam => {
+      const grupo = lista.filter(p => p.familia === fam);
+      if (!grupo.length) return;
+
+      const fi = FAMILIA_INFO[fam];
+      const div = document.createElement('div');
+      div.className = 'family-divider';
+      div.innerHTML = `
+        <span class="fam-divider-label ${fi.key}">${fi.emoji} ${fi.nombre} <span class="fam-divider-brand">${fi.marca}</span></span>
+        <div class="fam-divider-line"></div>`;
+      grid.appendChild(div);
+
+      grupo.forEach(p => {
+        const card = renderCard(p);
+        card.style.animationDelay = `${animIdx * 50}ms`;
+        grid.appendChild(card);
+        animIdx++;
+      });
+    });
+  } else {
+    lista.forEach((p, i) => {
+      const card = renderCard(p);
+      card.style.animationDelay = `${i * 50}ms`;
+      grid.appendChild(card);
+    });
+  }
+}
+
+// Nav principal
+navEl.querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    navEl.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    catActual = btn.dataset.cat;
+    searchI.value = '';
+    queryActual = '';
+    syncFamBar();
+    render();
+  });
+});
+
+// Banner familias (clickeable)
+famBar.querySelectorAll('.familia-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const cat = tab.dataset.cat;
+    navEl.querySelectorAll('button').forEach(b => {
+      b.classList.toggle('active', b.dataset.cat === cat);
+    });
+    catActual = cat;
+    searchI.value = '';
+    queryActual = '';
+    syncFamBar();
+    render();
+  });
+});
+
+function syncFamBar() {
+  famBar.querySelectorAll('.familia-tab').forEach(tab => {
+    tab.classList.toggle('active-fam', tab.dataset.cat === catActual);
+  });
+}
+
+// Buscador
+searchI.addEventListener('input', e => {
+  queryActual = e.target.value;
+  render();
+});
+
+render();
+
+// ══════════════════════════════════════════════════════════════════
+//  LÓGICA DEL CARRITO
+// ══════════════════════════════════════════════════════════════════
+
+// ── Número de WhatsApp — CAMBIÁ ESTE VALOR ──────────────────────
+const WA_NUMERO = '5493854991540'; // formato: 549 + código de área + número (sin 0 ni 15)
+// ────────────────────────────────────────────────────────────────
+
+let carrito = []; // [{ id, nombre, marca, emoji, precio, qty }]
+
+const cartFab     = document.getElementById('cart-fab');
+const cartCount   = document.getElementById('cart-count');
+const cartOverlay = document.getElementById('cart-overlay');
+const cartPanel   = document.getElementById('cart-panel');
+const cartItems   = document.getElementById('cart-items');
+const cartTotalTx = document.getElementById('cart-total-txt');
+const cartClose   = document.getElementById('cart-close');
+const btnWA       = document.getElementById('btn-whatsapp');
+const btnVaciar   = document.getElementById('btn-vaciar');
+
+// Delegación de eventos del carrito
+cartItems.addEventListener('click', (e) => {
+
+  const btnMas = e.target.closest('.btn-mas');
+  const btnMenos = e.target.closest('.btn-menos');
+
+  if (btnMas) {
+    const id = Number(btnMas.dataset.id);
+    const item = carrito.find(i => i.id === id);
+    if (!item) return;
+
+    item.qty++;
+    actualizarCarritoUI();
+  }
+
+  if (btnMenos) {
+    const id = Number(btnMenos.dataset.id);
+    const item = carrito.find(i => i.id === id);
+    if (!item) return;
+
+    item.qty--;
+
+    if (item.qty <= 0) {
+      carrito = carrito.filter(i => i.id !== id);
+    }
+
+    actualizarCarritoUI();
+  }
+
+});
+
+function abrirCarrito() {
+  cartOverlay.classList.add('open');
+  cartPanel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarCarrito() {
+  cartOverlay.classList.remove('open');
+  cartPanel.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+cartFab.addEventListener('click', abrirCarrito);
+cartClose.addEventListener('click', cerrarCarrito);
+cartOverlay.addEventListener('click', cerrarCarrito);
+
+function agregarAlCarrito(id) {
+  const prod = productos.find(p => p.id === id);
+  if (!prod) return;
+
+  const item = carrito.find(i => i.id === id);
+  if (item) {
+    item.qty++;
+  } else {
+    carrito.push({
+      id: prod.id,
+      nombre: prod.nombre,
+      marca: prod.marca,
+      emoji: prod.emoji,
+      precio: prod.precio,
+      qty: 1
+    });
+  }
+
+  actualizarCarritoUI();
+
+  // micro feedback en el botón
+  const btn = document.querySelector(`.btn-agregar[data-id="${id}"]`);
+  if (btn) {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Agregado';
+    btn.style.opacity = '.7';
+    setTimeout(() => { btn.textContent = orig; btn.style.opacity = ''; }, 900);
+  }
+}
+
+function cambiarCantidad(id, delta) {
+  const item = carrito.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) carrito = carrito.filter(i => i.id !== id);
+  actualizarCarritoUI();
+}
+
+function eliminarItem(id) {
+  carrito = carrito.filter(i => i.id !== id);
+  actualizarCarritoUI();
+}
+
+function parsePrecio(str) {
+  if (!str) return null;
+
+  const limpio = str
+    .replace(/\$/g, '')   // elimina $
+    .replace(/\./g, '')   // elimina separador de miles
+    .replace(',', '.');  // convierte decimal argentino
+
+  const n = parseFloat(limpio);
+
+  return isNaN(n) ? null : n;
+}
+
+function formatPrecio(n) {
+  if (n === null || isNaN(n)) return "";
+  return "$" + n.toLocaleString("es-AR");
+}
+
+function actualizarCarritoUI() {
+  const total = carrito.reduce((acc, i) => acc + i.qty, 0);
+
+  // Badge
+  if (total > 0) {
+    cartCount.style.display = 'flex';
+    cartCount.textContent = total > 99 ? '99+' : total;
+  } else {
+    cartCount.style.display = 'none';
+  }
+
+  // Si está vacío
+  if (carrito.length === 0) {
+    cartItems.innerHTML = `
+      <div class="cart-empty-msg">
+        <span class="emoji">📦</span>
+        Todavía no agregaste productos.
+      </div>`;
+    cartTotalTx.textContent = '—';
+    return;
+  }
+
+  cartItems.innerHTML = '';
+  let totalPrecio = 0;
+
+  carrito.forEach(item => {
+
+    const prod = productos.find(p => p.id === item.id);
+    if (!prod) return;
+
+    const precioNormal = parsePrecio(prod.precio);
+    const precioMayorista = parsePrecio(prod.precioMayorista);
+
+    let precioAplicado = precioNormal;
+
+    // Regla mayorista
+    if (item.qty >= 2 && precioMayorista !== null) {
+      precioAplicado = precioMayorista;
+    }
+
+    if (precioAplicado !== null) {
+      totalPrecio += precioAplicado * item.qty;
+    }
+
+    // 🔹 ACA debería ir el render del item del carrito
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <span>${prod.nombre}</span>
+        <span>${item.qty} x ${formatPrecio(precioAplicado)}</span>
+        <div class="cart-controls">
+        <button class="btn-menos" data-id="${item.id}">-</button>
+        <span class="qty">${item.qty}</span>
+        <button class="btn-mas" data-id="${item.id}">+</button>
+      </div>
+
+      </div>
+    `;
+  });
+
+
+  cartTotalTx.textContent = formatPrecio(totalPrecio);
+}
+  
+
+btnVaciar.addEventListener('click', () => {
+  if (!carrito.length) return;
+  if (confirm('¿Vaciar el pedido?')) {
+    carrito = [];
+    actualizarCarritoUI();
+  }
+});
+
+btnWA.addEventListener('click', () => {
+  if (!carrito.length) return;
+
+  let msg = '🛒 *Pedido Gigus Distribuciones*\n\n';
+
+  const familias = { panificados: [], fiambres: [], quesos: [] };
+  carrito.forEach(item => {
+    const prod = productos.find(p => p.id === item.id);
+    const fam = prod?.familia || 'quesos';
+    familias[fam].push(item);
+  });
+
+  const labels = { panificados: '🥖 Panificados Palau', fiambres: '🥩 Fiambres Tivarello', quesos: '🧀 Quesos Orcoví' };
+
+  Object.entries(familias).forEach(([fam, items]) => {
+    if (!items.length) return;
+    msg += `*${labels[fam]}*\n`;
+    items.forEach(i => {
+      msg += `• ${i.nombre} x${i.qty}`;
+      if (i.precio) msg += ` — ${i.precio} c/u`;
+      msg += '\n';
+    });
+    msg += '\n';
+  });
+
+  const totalPrecio = carrito.reduce((acc, i) => {
+    const p = parsePrecio(i.precio);
+    return p ? acc + p * i.qty : acc;
+  }, 0);
+
+  if (totalPrecio > 0) msg += `💰 *Total estimado: ${formatPrecio(totalPrecio)}*\n\n`;
+  msg += '_Por favor confirmame disponibilidad y precio final. ¡Gracias!_';
+
+  const url = `https://wa.me/${WA_NUMERO}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+ 
+  // ── MODAL IMAGEN ──
+const modal = document.getElementById('img-modal');
+const modalImg = document.getElementById('img-modal-content');
+const closeBtn = document.getElementById('img-close');
+
+function abrirImagen(src) {
+  modal.style.display = 'flex';
+  modalImg.src = src;
+}
+
+closeBtn.onclick = () => modal.style.display = 'none';
+
+modal.onclick = (e) => {
+  if (e.target === modal) modal.style.display = 'none';
+};
+</script>
+</body>
+</html>
